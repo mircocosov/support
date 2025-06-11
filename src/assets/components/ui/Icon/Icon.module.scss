@@ -1,0 +1,35 @@
+@import "@/assets/css/config.scss";
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.white {
+	color: $white-1;
+}
+
+.black {
+	color: $dark;
+}
+
+.blue {
+	color: $blue-1;
+}
+
+.red {
+	color: $orange-3;
+}
+
+.green {
+	color: $green-2;
+}
+
+.yellow {
+	color: $yellow-1;
+}
+
+.gray {
+	color: $primary;
+}

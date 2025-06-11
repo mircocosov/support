@@ -1,0 +1,60 @@
+@import "@/assets/css/config.scss";
+
+.card {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: $padding-2;
+	max-width: 260px;
+	background: $white-1;
+	border-radius: $radius-1;
+	border: $border 1px solid;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 4px;
+
+	p {
+		font-family: "Inter";
+		font-size: 14px;
+		color: $primary;
+		margin: 0;
+	}
+
+	h2 {
+		font-family: "Inter";
+		font-size: 30px;
+		font-weight: 700;
+		line-height: 36px;
+		color: $dark;
+		margin: 0;
+	}
+}
+
+.blue {
+	background: $blue-background;
+	padding: $padding-1;
+	border-radius: $radius-2;
+}
+
+.red {
+	background: $orange-background;
+	padding: $padding-1;
+	border-radius: $radius-2;
+}
+
+.yellow {
+	background: $yellow-background;
+	padding: $padding-1;
+	border-radius: $radius-2;
+}
+
+.green {
+	background: $green-background;
+	padding: $padding-1;
+	border-radius: $radius-2;
+}
