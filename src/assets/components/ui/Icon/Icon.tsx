@@ -126,11 +126,11 @@ const ICONS = {
 
 interface Props {
 	className?: string
-	svgColor?: "white" | "orange"
+	svgColor?: "white" | "black" | "blue" | "red" | "green" | "yellow" | "gray"
 	icon: keyof typeof ICONS
 }
 
-export default function Icon({ icon, className, svgColor = "white" }: Props) {
+export default function Icon({ icon, className, svgColor = "gray" }: Props) {
 	const IconComponent = ICONS[icon].icon
 
 	return (
