@@ -1,0 +1,10 @@
+@import '@/assets/css/config.scss';
+
+.input {
+  display: flex;
+  max-width: 100%;
+  max-height: 95px;
+  background: none;
+  border: 2px solid $secondary;
+  border-radius: $radius-1;
+}
