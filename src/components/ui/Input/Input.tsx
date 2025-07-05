@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import style from './Input.module.scss'
 
 export interface InputProps {
+  id?: string
   placeholder?: string
   className?: string
   type?: 'text' | 'password' | 'email'
@@ -12,6 +13,7 @@ export interface InputProps {
 }
 
 export default function Input({
+  id,
   className,
   placeholder,
   type,
@@ -22,6 +24,7 @@ export default function Input({
 }: InputProps) {
   return (
     <input
+      id={id}
       type={type}
       className={classNames(style.input, className)}
       placeholder={placeholder}

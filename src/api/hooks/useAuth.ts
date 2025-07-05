@@ -1,192 +1,139 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useApi } from './useApi'
+import { refreshToken, loginAPI, registerAPI, logoutAPI } from '@/types/auth'
+import { API_BASE_URL, API_ENDPOINTS } from '@/api/config/apiConfig'
 import {
+  UserData,
   AuthResponse,
   LoginCredentials,
   RegisterCredentials,
-  UserData,
+  UserRole,
 } from '@/types/auth'
-import { API_ENDPOINTS } from '@/api/config/apiConfig'
-import axios from 'axios'
 
 export const useAuth = () => {
-  const { sendRequest, isLoading } = useApi()
-  const navigate = useNavigate()
   const [user, setUser] = useState<UserData | null>(null)
-  const [authLoading, setAuthLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [accessToken, setAccessToken] = useState<string | null>(null)
+  const [loading, setLoading] = useState({
+    auth: false,
+    action: false,
+  })
   const [initialCheckDone, setInitialCheckDone] = useState(false)
+  const navigate = useNavigate()
 
-  const fetchCurrentUser = useCallback(async (): Promise<UserData | null> => {
+  // Сохраняем данные аутентификации
+  const saveAuthData = (data: AuthResponse) => {
+    localStorage.setItem('accessToken', data.access)
+    localStorage.setItem('refreshToken', data.refresh)
+    setAccessToken(data.access)
+    setUser(data.user)
+  }
+
+  // Очищаем данные аутентификации
+  const clearAuthData = useCallback(() => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+    setUser(null)
+    setAccessToken(null)
+  }, [])
+
+  // Проверяем текущую аутентификацию
+  const checkAuth = useCallback(async () => {
+    const token = localStorage.getItem('accessToken')
+    if (!token) {
+      setInitialCheckDone(true)
+      return
+    }
+
     try {
-      const token = localStorage.getItem('access_token')
-      if (!token) return null
-
-      const response = await sendRequest<UserData>({
-        url: API_ENDPOINTS.auth.me,
-        method: 'GET',
+      setLoading((prev) => ({ ...prev, auth: true }))
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.auth.me}`, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
       })
 
-      return response
-    } catch (err) {
-      if (axios.isAxiosError(err) && err.response?.status === 401) {
-        localStorage.removeItem('access_token')
+      if (response.ok) {
+        const userData: UserData = await response.json()
+        setUser(userData)
+        setAccessToken(token)
+      } else {
+        // Используем новую функцию refreshToken
+        const newToken = await refreshToken()
+        setAccessToken(newToken)
       }
-      return null
-    }
-  }, [sendRequest])
-
-  const getDefaultRoute = useCallback((role?: string): string => {
-    switch (role) {
-      case 'admin':
-        return '/admin/dashboard'
-      case 'support':
-      case 'supporter':
-        return '/support/tickets'
-      case 'user':
-      default:
-        return '/home'
+    } catch (error) {
+      console.error('Ошибка проверки авторизации:', error)
+    } finally {
+      setLoading((prev) => ({ ...prev, auth: false }))
+      setInitialCheckDone(true)
     }
   }, [])
 
-  const login = useCallback(
-    async (
-      credentials: LoginCredentials,
-      redirectPath?: string,
-    ): Promise<AuthResponse> => {
-      setAuthLoading(true)
-      try {
-        const response = await sendRequest<AuthResponse>({
-          url: API_ENDPOINTS.auth.login,
-          method: 'POST',
-          data: credentials,
-        })
-
-        localStorage.setItem('access_token', response.access)
-        if (response.refresh) {
-          localStorage.setItem('refresh_token', response.refresh)
-        }
-
-        const userData = response.user || (await fetchCurrentUser())
-        setUser(userData)
-        setInitialCheckDone(true)
-
-        if (userData) {
-          const targetPath = redirectPath || getDefaultRoute(userData.role)
-          navigate(targetPath, { replace: true })
-        }
-
-        return response
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Login failed')
-        throw err
-      } finally {
-        setAuthLoading(false)
-      }
-    },
-    [sendRequest, fetchCurrentUser, navigate, getDefaultRoute],
-  )
-
-  const register = useCallback(
-    async (credentials: RegisterCredentials): Promise<AuthResponse> => {
-      setAuthLoading(true)
-      try {
-        const response = await sendRequest<AuthResponse>({
-          url: API_ENDPOINTS.auth.register,
-          method: 'POST',
-          data: credentials,
-        })
-        return response
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Registration failed')
-        throw err
-      } finally {
-        setAuthLoading(false)
-      }
-    },
-    [sendRequest],
-  )
-
-  const logout = useCallback(async (): Promise<void> => {
+  // Вход в систему
+  const login = async (credentials: LoginCredentials, redirectPath = '/') => {
     try {
-      await sendRequest({
-        url: API_ENDPOINTS.auth.logout,
-        method: 'POST',
-      })
+      setLoading((prev) => ({ ...prev, action: true }))
+      // Используем новую функцию loginAPI
+      const data = await loginAPI(credentials)
+      saveAuthData(data)
+      navigate(redirectPath)
+      return data
+    } catch (error) {
+      console.error('Ошибка при входе:', error)
+      throw error instanceof Error ? error : new Error('Ошибка входа')
     } finally {
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('refresh_token')
-      setUser(null)
-      setInitialCheckDone(false)
-      navigate('/login', { replace: true })
+      setLoading((prev) => ({ ...prev, action: false }))
     }
-  }, [sendRequest, navigate])
+  }
 
-  const hasRole = useCallback(
-    (role: string): boolean => {
-      return user?.role === role
-    },
-    [user],
-  )
-
-  const redirectByRole = useCallback(() => {
-    if (!user) {
-      navigate('/login', { replace: true })
-      return
+  // Регистрация
+  const register = async (credentials: RegisterCredentials) => {
+    try {
+      setLoading((prev) => ({ ...prev, action: true }))
+      // Используем новую функцию registerAPI
+      const responseData = await registerAPI(credentials)
+      return responseData
+    } catch (error) {
+      console.error('Ошибка при регистрации:', error)
+      throw error instanceof Error ? error : new Error('Ошибка регистрации')
+    } finally {
+      setLoading((prev) => ({ ...prev, action: false }))
     }
-    navigate(getDefaultRoute(user.role), { replace: true })
-  }, [user, navigate, getDefaultRoute])
+  }
+
+  // Выход из системы
+  const logout = async () => {
+    try {
+      // Используем новую функцию logoutAPI
+      await logoutAPI(accessToken)
+    } catch (error) {
+      console.error('Ошибка при выходе:', error)
+    } finally {
+      clearAuthData()
+      navigate('/login')
+    }
+  }
+
+  // Проверка роли
+  const hasRole = (role: UserRole) => {
+    return user?.role === role
+  }
 
   useEffect(() => {
-    if (initialCheckDone) return
-
-    const checkAuth = async () => {
-      setAuthLoading(true)
-      try {
-        const userData = await fetchCurrentUser()
-        setUser(userData)
-      } catch (err) {
-        console.error('Auth check failed:', err)
-      } finally {
-        setAuthLoading(false)
-        setInitialCheckDone(true)
-      }
-    }
-
     checkAuth()
-  }, [fetchCurrentUser, initialCheckDone])
+  }, [checkAuth])
 
-  return useMemo(
-    () => ({
-      user,
-      login,
-      register,
-      logout,
-      hasRole,
-      redirectByRole,
-      loading: isLoading || authLoading,
-      error,
-      isAuthenticated: !!user,
-      initialCheckDone,
-      refreshUser: fetchCurrentUser,
-    }),
-    [
-      user,
-      login,
-      register,
-      logout,
-      hasRole,
-      redirectByRole,
-      isLoading,
-      authLoading,
-      error,
-      initialCheckDone,
-      fetchCurrentUser,
-    ],
-  )
+  return {
+    user,
+    accessToken,
+    isAuthenticated: !!user,
+    loading: loading.auth || loading.action,
+    initialCheckDone,
+    login,
+    logout,
+    register,
+    refreshToken, // Экспортируем функцию обновления токена
+    hasRole,
+    checkAuth,
+  }
 }

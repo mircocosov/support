@@ -1,58 +1,45 @@
-import { useState, FormEvent, ChangeEvent } from 'react'
-import style from './Register.module.scss'
+// src/pages/Register/Register.tsx
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '@/api/hooks/useAuth'
+import { RegisterCredentials } from '@/types/auth'
 import Input from '@/components/ui/Input'
 import Icon from '@/components/ui/Icon'
 import Button from '@/components/ui/Button'
-import { useAuth } from '@/api/hooks/useAuth'
-import { useNavigate } from 'react-router-dom'
-
-interface RegisterCredentials {
-  email: string
-  username: string
-  password: string
-  re_password: string
-}
-
-interface ApiError {
-  message: string
-  status?: number
-}
+import style from './Register.module.scss'
 
 export default function Register() {
-  const [formData, setFormData] = useState<RegisterCredentials>({
-    email: '',
+  const { register } = useAuth()
+  const [credentials, setCredentials] = useState<RegisterCredentials>({
     username: '',
+    email: '',
     password: '',
     re_password: '',
   })
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
 
-  const { register } = useAuth()
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      await register(formData)
-      navigate('/login')
-    } catch (err) {
-      const error = err as ApiError
-      setError(error.message || 'Ошибка при регистрации')
-    } finally {
-      setIsLoading(false)
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setCredentials((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (isSubmitting) return
+
+    setError('')
+    setIsSubmitting(true)
+
+    try {
+      await register(credentials)
+      navigate('/login', { state: { registrationSuccess: true } })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Ошибка регистрации')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -70,22 +57,22 @@ export default function Register() {
               <Input
                 type="text"
                 name="username"
-                value={formData.username}
+                value={credentials.username}
                 onChange={handleChange}
-                required
                 className={style.input}
+                required
               />
             </div>
 
             <div className={style.input_container}>
-              <p className={style.label}>Почта</p>
+              <p className={style.label}>Email</p>
               <Input
                 type="email"
                 name="email"
-                value={formData.email}
+                value={credentials.email}
                 onChange={handleChange}
-                required
                 className={style.input}
+                required
               />
             </div>
 
@@ -94,36 +81,31 @@ export default function Register() {
               <Input
                 type="password"
                 name="password"
-                value={formData.password}
+                value={credentials.password}
                 onChange={handleChange}
-                required
                 className={style.input}
+                required
               />
             </div>
 
             <div className={style.input_container}>
-              <p className={style.label}>Повторите пароль</p>
+              <p className={style.label}>Подтверждение пароля</p>
               <Input
                 type="password"
                 name="re_password"
-                value={formData.re_password}
+                value={credentials.re_password}
                 onChange={handleChange}
-                required
                 className={style.input}
+                required
               />
             </div>
           </div>
 
-          {error && <p className={style.error}>{error}</p>}
+          {error && <div className={style.error}>{error}</div>}
 
           <div className={style.buttons}>
-            <Button
-              type="primary"
-              isDisabled={isLoading}
-              onClick={handleSubmit}
-              className={style.login_button}
-            >
-              {isLoading ? 'Загрузка...' : 'Зарегистрироваться'}
+            <Button type="primary" className={style.register_button}>
+              {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
             </Button>
 
             <div className={style.links}>

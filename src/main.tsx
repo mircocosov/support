@@ -5,6 +5,7 @@ import RegisterPage from '@/pages/Register'
 import Login from '@/pages/Login'
 import ForgotPassword from './pages/ForgotPassword'
 import Home from './pages/Home'
+import CreateTicketPage from './pages/CreateTicket'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: '/forgot-password',
     element: <ForgotPassword />,
+  },
+  {
+    path: '/ticket/new',
+    element: <CreateTicketPage />,
   },
 ])
 
