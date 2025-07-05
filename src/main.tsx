@@ -6,6 +6,7 @@ import Login from '@/pages/Login'
 import ForgotPassword from './pages/ForgotPassword'
 import Home from './pages/Home'
 import CreateTicketPage from './pages/CreateTicket'
+import AdminPage from './pages/Admin'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/ticket/new',
     element: <CreateTicketPage />,
+  },
+  {
+    path: '/admin',
+    element: <AdminPage />,
   },
 ])
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/api/hooks/useAuth'
 import { LoginCredentials } from '@/types/auth'
@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 import style from './Login.module.scss'
 
 export default function Login() {
-  const { login } = useAuth()
+  const { login, isAuthenticated, userRole } = useAuth()
   const [credentials, setCredentials] = useState<LoginCredentials>({
     username: '',
     password: '',
@@ -16,6 +16,22 @@ export default function Login() {
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
+
+  // Обработка редиректа после успешной аутентификации
+  useEffect(() => {
+    if (isAuthenticated && userRole) {
+      switch (userRole) {
+        case 'admin':
+          navigate('/admin', { replace: true })
+          break
+        case 'support':
+          navigate('/support', { replace: true })
+          break
+        default:
+          navigate('/', { replace: true })
+      }
+    }
+  }, [isAuthenticated, userRole, navigate])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -30,27 +46,10 @@ export default function Login() {
     setIsSubmitting(true)
 
     try {
-      const response = await login(credentials)
-
-      localStorage.setItem('access_token', response.access)
-      if (response.refresh) {
-        localStorage.setItem('refresh_token', response.refresh)
-      }
-
-      const role = response.user?.role || 'user'
-      switch (role) {
-        case 'admin':
-          navigate('/admin/dashboard', { replace: true })
-          break
-        case 'support':
-          navigate('/support/tickets', { replace: true })
-          break
-        default:
-          navigate('/', { replace: true })
-      }
+      await login(credentials)
+      // Навигация теперь обрабатывается в useEffect
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Неверный логин или пароль')
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -93,7 +92,11 @@ export default function Login() {
           {error && <div className={style.error}>{error}</div>}
 
           <div className={style.buttons}>
-            <Button type="primary" className={style.login_button}>
+            <Button
+              type="primary"
+              className={style.login_button}
+              isDisabled={isSubmitting}
+            >
               {isSubmitting ? 'Вход...' : 'Войти'}
             </Button>
 

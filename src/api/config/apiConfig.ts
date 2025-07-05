@@ -1,4 +1,3 @@
-// src/api/config.ts
 type ApiConfig = {
   baseUrl: string
   endpoints: {
@@ -18,6 +17,15 @@ type ApiConfig = {
       categories: string
       comments: (ticketId: number) => string
     }
+    admin: {
+      createCategories: string
+      updateCategories: (id: number) => string
+      deleteCategories: (id: number) => string
+      getCategories: string
+      ticketHistory: string
+      users: string
+      updateUser: (id: number) => string
+    }
   }
 }
 
@@ -27,8 +35,8 @@ const apiConfig: ApiConfig = {
     auth: {
       login: '/api/v1/auth/login/',
       logout: '/api/v1/auth/logout/',
-      refresh: '/api/v1/auth/refresh/',
-      verify: '/api/v1/auth/verify/',
+      refresh: '/api/v1/auth/jwt/refresh/',
+      verify: '/api/v1/auth/jwt/verify/',
       register: '/api/v1/users/register/',
       forgotPassword: '/api/v1/users/reset-password/',
       me: '/api/v1/users/me/',
@@ -39,6 +47,15 @@ const apiConfig: ApiConfig = {
       detail: (id) => `/api/v1/tickets/${id}/`,
       categories: '/api/v1/tickets/categories/',
       comments: (ticketId) => `/api/v1/tickets/${ticketId}/comments/`,
+    },
+    admin: {
+      createCategories: '/api/v1/admin/categories/',
+      updateCategories: (id) => `/api/v1/admin/categories/${id}/`,
+      deleteCategories: (id) => `/api/v1/admin/categories/${id}/`,
+      getCategories: '/api/v1/tickets/categories/',
+      ticketHistory: '/api/v1/admin/tickets/history/',
+      users: '/api/v1/admin/users/',
+      updateUser: (id) => `/api/v1/admin/users/${id}/role/`,
     },
   },
 }

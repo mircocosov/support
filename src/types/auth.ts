@@ -1,4 +1,5 @@
 import { API_BASE_URL, API_ENDPOINTS } from '@/api/config/apiConfig'
+import { ApiError } from '@/types'
 
 export type UserRole = 'admin' | 'support' | 'user'
 
@@ -48,8 +49,10 @@ export const refreshToken = async (): Promise<string> => {
 
     if (!response.ok) {
       const errorText = await response.text()
-      throw new Error(
+      throw new ApiError(
         `Ошибка обновления токена: ${response.status} ${errorText}`,
+        response.status,
+        errorText,
       )
     }
 
@@ -76,10 +79,12 @@ export const loginAPI = async (
 
   if (!response.ok) {
     const errorText = await response.text()
-    throw new Error(
+    throw new ApiError(
       response.status === 401
         ? 'Неверные учетные данные'
         : `Ошибка входа: ${response.status} ${errorText}`,
+      response.status,
+      errorText,
     )
   }
 
@@ -132,7 +137,7 @@ export const registerAPI = async (
       errorMessage = responseData
     }
 
-    throw new Error(errorMessage)
+    throw new ApiError(errorMessage, response.status, responseData)
   }
 
   return responseData

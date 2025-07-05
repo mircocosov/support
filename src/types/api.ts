@@ -1,15 +1,13 @@
 import { AxiosRequestConfig } from 'axios'
 
-interface ApiError {
+export interface ApiError {
   message: string
   status?: number
   data?: unknown
 }
 
-interface UseApiReturn {
+export interface UseApiReturn {
   sendRequest: <T = unknown>(config: AxiosRequestConfig) => Promise<T>
   loading: boolean
   error: ApiError | null
 }
-
-export type { ApiError, UseApiReturn }
