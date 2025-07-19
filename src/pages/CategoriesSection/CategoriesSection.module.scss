@@ -1,0 +1,136 @@
+@import '@/assets/css/config.scss';
+
+.categoriesSection {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 32px 24px;
+  background: $white;
+  border-radius: $radius-1;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+
+  .addButton {
+    margin-bottom: 24px;
+    font-size: 1rem;
+    padding: 10px 24px;
+    border-radius: $radius-1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: $primary;
+    color: $white;
+    font-weight: 600;
+    border: none;
+    transition: background 0.2s;
+    
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    background: none;
+    border-radius: $radius-1;
+    min-width: 60px;
+    height: 36px;
+    transition: background 0.15s;
+    
+    &:hover {
+      background: none;
+    }
+  }
+
+  .actionButton {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background: $secondary;
+      svg {
+        filter: brightness(0) invert(1);
+      }
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      color: $primary;
+    }
+  }
+}
+
+.dialogActions, .buttonRow {
+  display: flex;
+  gap: 18px;
+  justify-content: flex-start;
+  margin-top: 18px;
+}
+
+input[type="text"], .input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ee0979;
+  margin-bottom: 12px;
+}
+
+.container {
+  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+}
+
+.tableBox, .categoriesSection table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(123,47,242,0.06);
+  margin-top: 8px;
+}
+.categoriesSection th, .categoriesSection td {
+  padding: 12px 16px;
+  text-align: left;
+}
+.categoriesSection th {
+  background: #eaf0fa;
+  color: #7b2ff2;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.categoriesSection tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.15s;
+}
+.categoriesSection tr:hover {
+  background: #faf8ff;
+}
+.categoriesSection .actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border-radius: 8px;
+  min-width: 60px;
+  height: 36px;
+  padding: 0;
+}
+.categoriesSection .actionButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+}

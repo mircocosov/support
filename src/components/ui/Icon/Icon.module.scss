@@ -1,0 +1,23 @@
+@import '@/assets/css/config.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary {
+  color: $secondary;
+}
+
+.white {
+  color: $white;
+}
+
+.black {
+  color: $dark;
+}
+
+.blue {
+  color: $blue-1;
+}

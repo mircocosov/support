@@ -1,0 +1,347 @@
+@import '@/assets/css/config.scss';
+
+.ticketCard {
+  @include card-base;
+  cursor: pointer;
+  transition: all $transition-normal;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+  }
+  
+  @include mobile {
+    padding: $spacing-4;
+    margin-bottom: $spacing-3;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-4;
+  
+  @include mobile {
+    margin-bottom: $spacing-3;
+  }
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-gray-900;
+  margin: 0;
+  line-height: $line-height-tight;
+  
+  @include mobile {
+    font-size: $font-size-base;
+  }
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-1 $spacing-3;
+  border-radius: $border-radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  
+  &.open {
+    background: $status-open-bg;
+    color: $status-open-color;
+  }
+  
+  &.in_progress {
+    background: $status-in-progress-bg;
+    color: $status-in-progress-color;
+  }
+  
+  &.resolved {
+    background: $status-resolved-bg;
+    color: $status-resolved-color;
+  }
+  
+  &.closed {
+    background: $status-closed-bg;
+    color: $status-closed-color;
+  }
+  
+  @include mobile {
+    padding: $spacing-1 $spacing-2;
+    font-size: $font-size-xs;
+  }
+}
+
+.description {
+  color: $color-gray-600;
+  margin-bottom: $spacing-4;
+  line-height: $line-height-normal;
+  
+  @include mobile {
+    margin-bottom: $spacing-3;
+    font-size: $font-size-sm;
+  }
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-2;
+  }
+}
+
+.metaLeft {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  
+  @include mobile {
+    gap: $spacing-2;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  color: $color-gray-500;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.priority {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  
+  &.low {
+    background: rgba($color-success, 0.1);
+    color: $color-success-dark;
+  }
+  
+  &.medium {
+    background: rgba($color-warning, 0.1);
+    color: $color-warning-dark;
+  }
+  
+  &.high {
+    background: rgba($color-error, 0.1);
+    color: $color-error-dark;
+  }
+  
+  &.urgent {
+    background: rgba($color-error, 0.2);
+    color: $color-error-dark;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-1 $spacing-2;
+  background: rgba($color-primary, 0.1);
+  color: $color-primary-dark;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-2;
+  
+  @include mobile {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.actionButton {
+  @include button-base;
+  padding: $spacing-1 $spacing-3;
+  min-height: 32px;
+  font-size: $font-size-sm;
+  
+  &.primary {
+    background: $gradient-primary;
+    color: $color-white;
+  }
+  
+  &.secondary {
+    background: $color-white;
+    color: $color-primary;
+    border: 1px solid $color-primary;
+  }
+  
+  @include mobile {
+    padding: $spacing-1 $spacing-2;
+    min-height: 28px;
+    font-size: $font-size-xs;
+  }
+}
+
+.attachments {
+  margin-top: $spacing-3;
+  padding-top: $spacing-3;
+  border-top: 1px solid $color-gray-200;
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  
+  @include mobile {
+    margin-top: $spacing-2;
+    padding-top: $spacing-2;
+  }
+}
+
+.attachmentCount {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  color: $color-gray-500;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.attachmentList {
+  margin-top: $spacing-2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+  
+  @include mobile {
+    gap: $spacing-1;
+  }
+}
+
+.attachmentItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  padding: $spacing-1 $spacing-2;
+  background: $color-gray-50;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  color: $color-gray-600;
+  text-decoration: none;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: $color-gray-100;
+    color: $color-primary;
+  }
+  
+  @include mobile {
+    padding: $spacing-1;
+  }
+}
+
+.attachmentIcon {
+  width: 16px;
+  height: 16px;
+  color: $color-gray-500;
+  flex-shrink: 0;
+  
+  @include mobile {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.comments {
+  margin-top: $spacing-3;
+  padding-top: $spacing-3;
+  border-top: 1px solid $color-gray-200;
+  
+  @include mobile {
+    margin-top: $spacing-2;
+    padding-top: $spacing-2;
+  }
+}
+
+.commentCount {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  color: $color-gray-500;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.assignedTo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  margin-top: $spacing-3;
+  padding-top: $spacing-3;
+  border-top: 1px solid $color-gray-200;
+  
+  @include mobile {
+    margin-top: $spacing-2;
+    padding-top: $spacing-2;
+  }
+}
+
+.assignedLabel {
+  color: $color-gray-500;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.assignedUser {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.userAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: $gradient-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-white;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  
+  @include mobile {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+} 

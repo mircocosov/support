@@ -1,0 +1,159 @@
+@import '@/assets/css/config.scss';
+
+.input {
+  @include input-base;
+  
+  &.error {
+    border-color: $color-error;
+    
+    &:focus {
+      border-color: $color-error;
+      box-shadow: 0 0 0 3px rgba($color-error, 0.1);
+    }
+  }
+  
+  &.success {
+    border-color: $color-success;
+    
+    &:focus {
+      border-color: $color-success;
+      box-shadow: 0 0 0 3px rgba($color-success, 0.1);
+    }
+  }
+  
+  &.disabled {
+    background: $color-gray-100;
+    color: $color-gray-500;
+    cursor: not-allowed;
+    
+    &:focus {
+      border-color: $color-gray-300;
+      box-shadow: none;
+    }
+  }
+  
+  &.small {
+    padding: $spacing-2;
+    font-size: $font-size-sm;
+    
+    @include mobile {
+      padding: $spacing-1;
+      font-size: $font-size-xs;
+    }
+  }
+  
+  &.large {
+    padding: $spacing-4;
+    font-size: $font-size-lg;
+    
+    @include mobile {
+      padding: $spacing-3;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  margin-bottom: $spacing-2;
+  font-weight: $font-weight-medium;
+  color: $color-gray-900;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    margin-bottom: $spacing-1;
+    font-size: $font-size-xs;
+  }
+  
+  &.required::after {
+    content: ' *';
+    color: $color-error;
+  }
+}
+
+.errorMessage {
+  margin-top: $spacing-1;
+  font-size: $font-size-xs;
+  color: $color-error;
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  
+  &::before {
+    content: '⚠';
+    font-size: $font-size-xs;
+  }
+}
+
+.successMessage {
+  margin-top: $spacing-1;
+  font-size: $font-size-xs;
+  color: $color-success;
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+  
+  &::before {
+    content: '✓';
+    font-size: $font-size-xs;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-gray-400;
+  pointer-events: none;
+  
+  &.left {
+    left: $spacing-3;
+  }
+  
+  &.right {
+    right: $spacing-3;
+  }
+  
+  @include mobile {
+    &.left {
+      left: $spacing-2;
+    }
+    
+    &.right {
+      right: $spacing-2;
+    }
+  }
+}
+
+.inputWithIcon {
+  &.left {
+    padding-left: calc($spacing-3 + 20px);
+    
+    @include mobile {
+      padding-left: calc($spacing-2 + 16px);
+    }
+  }
+  
+  &.right {
+    padding-right: calc($spacing-3 + 20px);
+    
+    @include mobile {
+      padding-right: calc($spacing-2 + 16px);
+    }
+  }
+  
+  &.both {
+    padding-left: calc($spacing-3 + 20px);
+    padding-right: calc($spacing-3 + 20px);
+    
+    @include mobile {
+      padding-left: calc($spacing-2 + 16px);
+      padding-right: calc($spacing-2 + 16px);
+    }
+  }
+}

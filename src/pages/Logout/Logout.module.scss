@@ -1,0 +1,175 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+}
+
+.profileBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(123, 47, 242, 0.12), 0 1.5px 8px rgba(0,0,0,0.06);
+  padding: 40px 32px 32px 32px;
+  margin-bottom: 40px;
+  min-width: 320px;
+  max-width: 90vw;
+  gap: 18px;
+  animation: fadeIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.profileIcon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #6dd5ed 0%, #b967ff 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(123, 47, 242, 0.10);
+  margin-bottom: 8px;
+}
+
+.profileInfo {
+  text-align: center;
+}
+
+.profileName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #7b2ff2;
+  margin-bottom: 2px;
+}
+
+.profileEmail {
+  font-size: 1.1rem;
+  color: #888;
+}
+
+.logoutButton {
+  margin-top: 32px;
+  min-width: 200px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #f357a8 0%, #7b2ff2 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(123, 47, 242, 0.10);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.logoutButton:hover, .logoutButton:focus {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px rgba(123, 47, 242, 0.18);
+  background: linear-gradient(90deg, #7b2ff2 0%, #f357a8 100%);
+}
+
+.customLogoutButton {
+  margin-top: 32px;
+  min-width: 220px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 16px 36px;
+  background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(238, 9, 121, 0.18), 0 1.5px 8px rgba(0,0,0,0.10);
+  transition: transform 0.18s, box-shadow 0.18s, background 0.22s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 8px rgba(255, 106, 0, 0.12);
+  font-family: 'Roboto', sans-serif;
+}
+.customLogoutButton:hover, .customLogoutButton:focus {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 40px 0 rgba(238, 9, 121, 0.28), 0 2px 12px rgba(0,0,0,0.12);
+  background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 0 8px 0;
+  min-width: 260px;
+}
+.dialogContent h3 {
+  font-size: 1.25rem;
+  color: #7b2ff2;
+  margin-bottom: 0;
+}
+.dialogContent p {
+  color: #444;
+  font-size: 1.05rem;
+  margin: 0;
+}
+.dialogActions {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+@media (max-width: 600px) {
+  .profileBox {
+    min-width: 90vw;
+    padding: 24px 8vw 24px 8vw;
+  }
+  .dialogContent {
+    min-width: 180px;
+  }
+} 
+
+.logoutTextButton {
+  background: none;
+  border: none;
+  color: #ee0979;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0;
+  margin-top: 32px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  transition: color 0.18s;
+  position: relative;
+  outline: none;
+}
+.logoutTextButton::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+  transition: width 0.25s cubic-bezier(.4,0,.2,1);
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+}
+.logoutTextButton:hover,
+.logoutTextButton:focus {
+  color: #ff6a00;
+}
+.logoutTextButton:hover::after,
+.logoutTextButton:focus::after {
+  width: 100%;
+} 
+
+.backButton {
+  margin-top: 16px;
+} 

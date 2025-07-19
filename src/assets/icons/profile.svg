@@ -1,0 +1,16 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="24" cy="24" r="24" fill="url(#profile-gradient)"/>
+  <g filter="url(#shadow)">
+    <circle cx="24" cy="19" r="7" fill="#fff" fill-opacity="0.9"/>
+    <ellipse cx="24" cy="34" rx="12" ry="7" fill="#fff" fill-opacity="0.9"/>
+  </g>
+  <defs>
+    <linearGradient id="profile-gradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6dd5ed"/>
+      <stop offset="1" stop-color="#b967ff"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#b967ff" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+</svg> 

@@ -1,0 +1,140 @@
+@import './config.scss';
+@import './common.scss';
+
+// Reset и базовые стили
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  scroll-behavior: smooth;
+  
+  @include mobile {
+    font-size: $font-size-sm;
+  }
+}
+
+body {
+  background: $gradient-primary;
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: $roboto;
+  line-height: $line-height-normal;
+  color: $color-gray-900;
+  overflow-x: hidden;
+}
+
+// Контейнеры
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-5;
+  
+  @include mobile {
+    padding: 0 $spacing-4;
+  }
+}
+
+// Утилиты для отступов
+.mt-1 { margin-top: $spacing-1; }
+.mt-2 { margin-top: $spacing-2; }
+.mt-3 { margin-top: $spacing-3; }
+.mt-4 { margin-top: $spacing-4; }
+.mb-1 { margin-bottom: $spacing-1; }
+.mb-2 { margin-bottom: $spacing-2; }
+.mb-3 { margin-bottom: $spacing-3; }
+.mb-4 { margin-bottom: $spacing-4; }
+.p-1 { padding: $spacing-1; }
+.p-2 { padding: $spacing-2; }
+.p-3 { padding: $spacing-3; }
+.p-4 { padding: $spacing-4; }
+
+// Утилиты для flexbox
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: $spacing-1; }
+.gap-2 { gap: $spacing-2; }
+.gap-3 { gap: $spacing-3; }
+
+// Утилиты для текста
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.font-bold { font-weight: $font-weight-bold; }
+.font-medium { font-weight: $font-weight-medium; }
+.text-sm { font-size: $font-size-sm; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }
+
+// Утилиты для скрытия/показа элементов
+.hidden { display: none; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+
+@include mobile {
+  .hidden-mobile { display: none; }
+  .block-mobile { display: block; }
+}
+
+@include desktop {
+  .hidden-desktop { display: none; }
+  .block-desktop { display: block; }
+}
+
+// Анимации
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+// Загрузка
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  font-size: $font-size-lg;
+  color: $color-white;
+  
+  @include mobile {
+    min-height: 150px;
+    font-size: $font-size-base;
+  }
+}
+
+// Ошибки
+.error {
+  text-align: center;
+  color: $color-error;
+  padding: $spacing-4;
+  background: rgba($color-error, 0.1);
+  border-radius: $border-radius-md;
+  margin: $spacing-4 0;
+  
+  @include mobile {
+    padding: $spacing-3;
+    margin: $spacing-3 0;
+  }
+}

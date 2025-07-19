@@ -1,0 +1,103 @@
+@import '@/assets/css/config.scss';
+.ticketHistorySection, .container {
+  background: $white;
+  border-radius: $radius-1;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  max-width: 1400px;
+  margin: 32px auto 0 auto;
+  box-sizing: border-box;
+}
+
+.title {
+  color: #fff;
+  font-size: 2.3rem;
+  font-weight: 800;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 32px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  background: none;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #fff;
+  background-clip: text;
+  transition: color 0.22s, background 0.5s, background-position 0.5s;
+}
+.title:hover, .title:focus {
+  background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+// Для интерактивных элементов (например, ссылок или кнопок)
+.action {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.22s, background 0.5s, background-position 0.5s;
+  outline: none;
+  letter-spacing: 0.03em;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #fff;
+}
+.action:hover, .action:focus {
+  background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.action::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6a00 0%, #ee0979 100%);
+  border-radius: 2px;
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+}
+.action:hover::after, .action:focus::after {
+  width: 100%;
+}
+
+.historyTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(123,47,242,0.06);
+  margin-top: 8px;
+}
+.historyTable th, .historyTable td {
+  padding: 12px 16px;
+  text-align: left;
+}
+.historyTable th {
+  background: #eaf0fa;
+  color: #7b2ff2;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.historyTable tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.15s;
+}
+.historyTable tr:hover {
+  background: #faf8ff;
+}

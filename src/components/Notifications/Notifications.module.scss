@@ -1,0 +1,289 @@
+@import '@/assets/css/config.scss';
+
+.notificationsContainer {
+  position: relative;
+}
+
+.notificationsButton {
+  @include button-base;
+  background: transparent;
+  color: $color-white;
+  padding: 0 18px;
+  min-height: auto;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid rgba($color-white, 0.3);
+  
+  &:hover {
+    background: rgba($color-white, 0.1);
+    border-color: rgba($color-white, 0.5);
+  }
+  
+  @include mobile {
+    padding: 0 12px;
+    height: 36px;
+  }
+}
+
+.bellIcon {
+  width: 20px;
+  height: 20px;
+  color: $color-white;
+  display: block;
+  margin: 0 auto;
+  align-self: center;
+  
+  @include mobile {
+    width: 18px;
+    height: 18px;
+  }
+  
+  svg {
+    width: 20px !important;
+    height: 20px !important;
+    display: block;
+    color: $color-white !important;
+    stroke: $color-white !important;
+    fill: $color-white !important;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $color-error;
+  color: $color-white;
+  border-radius: $border-radius-full;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  padding: 0 $spacing-1;
+  
+  @include mobile {
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: $color-white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-xl;
+  z-index: $z-dropdown;
+  margin-top: $spacing-2;
+  
+  @include mobile {
+    width: 280px;
+    right: -$spacing-4;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4;
+  border-bottom: 1px solid $color-gray-200;
+  
+  @include mobile {
+    padding: $spacing-3;
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  
+  @include mobile {
+    gap: $spacing-1;
+  }
+}
+
+.refreshBtn {
+  font-size: $font-size-sm;
+  color: $color-gray-600;
+  padding: $spacing-1 $spacing-2;
+  min-height: auto;
+  
+  &:hover {
+    background: rgba($color-primary, 0.1);
+    color: $color-primary;
+  }
+  
+  @include mobile {
+    font-size: $font-size-xs;
+    padding: $spacing-1;
+  }
+}
+
+.refreshIcon {
+  width: 16px;
+  height: 16px;
+  color: $color-gray-600;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: $color-primary;
+  }
+  
+  &.spinning {
+    animation: spin 1s linear infinite;
+  }
+  
+  @include mobile {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-gray-900;
+  margin: 0;
+  
+  @include mobile {
+    font-size: $font-size-base;
+  }
+}
+
+.markAllRead {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  padding: $spacing-1 $spacing-2;
+  min-height: auto;
+  
+  &:hover {
+    background: rgba($color-primary, 0.1);
+  }
+  
+  @include mobile {
+    font-size: $font-size-xs;
+    padding: $spacing-1;
+  }
+}
+
+.notificationsList {
+  max-height: 400px;
+  overflow-y: auto;
+  
+  @include mobile {
+    max-height: 300px;
+  }
+}
+
+.notificationItem {
+  display: flex;
+  align-items: flex-start;
+  padding: $spacing-3 $spacing-4;
+  border-bottom: 1px solid $color-gray-100;
+  cursor: pointer;
+  transition: background-color $transition-normal;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background: $color-gray-50;
+  }
+  
+  &.unread {
+    background: rgba($color-primary, 0.05);
+    
+    &:hover {
+      background: rgba($color-primary, 0.1);
+    }
+  }
+  
+  @include mobile {
+    padding: $spacing-2 $spacing-3;
+  }
+}
+
+.notificationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.message {
+  font-size: $font-size-sm;
+  color: $color-gray-900;
+  margin: 0 0 $spacing-1 0;
+  line-height: $line-height-normal;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.time {
+  font-size: $font-size-xs;
+  color: $color-gray-500;
+  
+  @include mobile {
+    font-size: 10px;
+  }
+}
+
+.unreadDot {
+  width: 8px;
+  height: 8px;
+  background: $color-primary;
+  border-radius: 50%;
+  margin-left: $spacing-2;
+  flex-shrink: 0;
+  margin-top: $spacing-1;
+  
+  @include mobile {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+.loading {
+  padding: $spacing-6;
+  text-align: center;
+  color: $color-gray-500;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    padding: $spacing-4;
+    font-size: $font-size-xs;
+  }
+}
+
+.empty {
+  padding: $spacing-6;
+  text-align: center;
+  color: $color-gray-500;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    padding: $spacing-4;
+    font-size: $font-size-xs;
+  }
+} 

@@ -1,0 +1,127 @@
+@import '@/assets/css/config.scss';
+
+.button {
+  @include button-base;
+  
+  &.primary {
+    background: $gradient-primary;
+    color: $color-white;
+    box-shadow: $shadow-button;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: $shadow-button-hover;
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+  
+  &.secondary {
+    background: $color-white;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+    
+    &:hover:not(:disabled) {
+      background: $color-primary;
+      color: $color-white;
+      transform: translateY(-2px);
+      box-shadow: $shadow-button;
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+  
+  &.text {
+    background: transparent;
+    color: $color-primary;
+    padding: $spacing-2 $spacing-4;
+    min-height: auto;
+    
+    &:hover:not(:disabled) {
+      background: rgba($color-primary, 0.1);
+    }
+  }
+  
+  &.error {
+    background: $gradient-error;
+    color: $color-white;
+    box-shadow: $shadow-button-error;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: $shadow-button-error-hover;
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+  
+  &.success {
+    background: $gradient-success;
+    color: $color-white;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba($color-success, 0.3);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+  
+  &.small {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-sm;
+    min-height: 36px;
+    
+    @include mobile {
+      padding: $spacing-1 $spacing-3;
+      min-height: 32px;
+    }
+  }
+  
+  &.large {
+    padding: $spacing-4 $spacing-8;
+    font-size: $font-size-lg;
+    min-height: 52px;
+    
+    @include mobile {
+      padding: $spacing-3 $spacing-6;
+      min-height: 48px;
+    }
+  }
+  
+  &.fullWidth {
+    width: 100%;
+  }
+  
+  &.loading {
+    position: relative;
+    color: transparent;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,252 @@
+@import '@/assets/css/config.scss';
+
+.select {
+  position: relative;
+  width: 150px;
+  min-width: 150px;
+}
+
+.selectButton {
+  background: #faf8ff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  color: #7b2ff2;
+  font-size: 1.1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  padding: 8px 36px 8px 18px;
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  position: relative;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-shadow: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.selectButton:focus, .selectButton.open {
+  border: 1.5px solid #ee0979;
+}
+.selectButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #7b2ff2;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.2s;
+}
+.selectButton.open::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+.selectedValue {
+  color: #7b2ff2;
+  font-weight: 500;
+  font-size: 1.1rem;
+  flex: 1;
+  text-align: left;
+  padding-right: 10px;
+}
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #faf8ff;
+  border: 1.5px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 24px rgba(123,47,242,0.10);
+  z-index: 10;
+  min-width: 100%;
+  width: max-content;
+  max-width: 300px;
+  box-sizing: border-box;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.option {
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background-color 0.18s;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  color: #7b2ff2;
+  font-size: 1.1rem;
+  background: #faf8ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.option:last-child {
+  border-bottom: none;
+}
+.option:hover, .option.selected {
+  background: #f3e8ff;
+  color: #ee0979;
+}
+.optionGroup {
+  .groupLabel {
+    padding: $spacing-2 $spacing-3;
+    font-weight: $font-weight-semibold;
+    color: $color-gray-600;
+    background: $color-gray-50;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    @include mobile {
+      padding: $spacing-1 $spacing-2;
+    }
+  }
+  
+  .option {
+    padding-left: $spacing-6;
+    
+    @include mobile {
+      padding-left: $spacing-4;
+    }
+  }
+}
+
+.searchInput {
+  @include input-base;
+  border: none;
+  border-bottom: 1px solid $color-gray-200;
+  border-radius: 0;
+  margin: $spacing-2;
+  width: calc(100% - #{$spacing-4});
+  
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: none;
+  }
+}
+
+.noOptions {
+  padding: 12px 18px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  font-size: 1rem;
+  background: #faf8ff;
+}
+
+.loading {
+  padding: $spacing-4;
+  text-align: center;
+  color: $color-gray-500;
+  
+  @include mobile {
+    padding: $spacing-3;
+  }
+}
+
+.error {
+  border-color: $color-error;
+  
+  &:focus {
+    border-color: $color-error;
+    box-shadow: 0 0 0 3px rgba($color-error, 0.1);
+  }
+}
+
+.success {
+  border-color: $color-success;
+  
+  &:focus {
+    border-color: $color-success;
+    box-shadow: 0 0 0 3px rgba($color-success, 0.1);
+  }
+}
+
+.small {
+  .selectButton {
+    padding: $spacing-2;
+    font-size: $font-size-sm;
+    
+    @include mobile {
+      padding: $spacing-1;
+      font-size: $font-size-xs;
+    }
+  }
+  
+  .option {
+    padding: $spacing-2;
+    
+    @include mobile {
+      padding: $spacing-1;
+    }
+  }
+}
+
+.large {
+  .selectButton {
+    padding: $spacing-4;
+    font-size: $font-size-lg;
+    
+    @include mobile {
+      padding: $spacing-3;
+      font-size: $font-size-base;
+    }
+  }
+  
+  .option {
+    padding: $spacing-4;
+    
+    @include mobile {
+      padding: $spacing-3;
+    }
+  }
+}
+
+.multiSelect {
+  .selectedValue {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-1;
+  }
+  
+  .selectedTag {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+    padding: $spacing-1 $spacing-2;
+    background: rgba($color-primary, 0.1);
+    color: $color-primary-dark;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    
+    .removeButton {
+      background: none;
+      border: none;
+      color: $color-primary-dark;
+      cursor: pointer;
+      padding: 0;
+      font-size: $font-size-xs;
+      line-height: 1;
+      
+      &:hover {
+        color: $color-error;
+      }
+    }
+  }
+}
+
+.checkbox {
+  margin-right: $spacing-2;
+  
+  @include mobile {
+    margin-right: $spacing-1;
+  }
+}

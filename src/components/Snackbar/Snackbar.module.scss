@@ -1,0 +1,229 @@
+@import '@/assets/css/config.scss';
+
+.snackbar {
+  position: fixed;
+  bottom: $spacing-6;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $color-white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-lg;
+  padding: $spacing-4;
+  min-width: 300px;
+  max-width: 500px;
+  z-index: $z-tooltip;
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  border-left: 4px solid $color-primary;
+  
+  @include mobile {
+    bottom: $spacing-4;
+    left: $spacing-4;
+    right: $spacing-4;
+    transform: none;
+    min-width: auto;
+    max-width: none;
+    padding: $spacing-3;
+  }
+  
+  &.success {
+    border-left-color: $color-success;
+    
+    .icon {
+      color: $color-success;
+    }
+  }
+  
+  &.error {
+    border-left-color: $color-error;
+    
+    .icon {
+      color: $color-error;
+    }
+  }
+  
+  &.warning {
+    border-left-color: $color-warning;
+    
+    .icon {
+      color: $color-warning;
+    }
+  }
+  
+  &.info {
+    border-left-color: $color-info;
+    
+    .icon {
+      color: $color-info;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: $font-weight-semibold;
+  color: $color-gray-900;
+  margin-bottom: $spacing-1;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.message {
+  color: $color-gray-600;
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: $color-primary;
+  
+  @include mobile {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.closeButton {
+  @include button-base;
+  padding: $spacing-1;
+  min-height: 24px;
+  width: 24px;
+  background: transparent;
+  color: $color-gray-400;
+  border-radius: $border-radius-sm;
+  flex-shrink: 0;
+  
+  &:hover {
+    background: $color-gray-100;
+    color: $color-gray-600;
+  }
+  
+  @include mobile {
+    min-height: 20px;
+    width: 20px;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-2;
+  margin-top: $spacing-3;
+  
+  @include mobile {
+    margin-top: $spacing-2;
+    gap: $spacing-1;
+  }
+}
+
+.actionButton {
+  @include button-base;
+  padding: $spacing-1 $spacing-3;
+  min-height: 28px;
+  font-size: $font-size-xs;
+  background: transparent;
+  color: $color-primary;
+  border: 1px solid $color-primary;
+  
+  &:hover {
+    background: $color-primary;
+    color: $color-white;
+  }
+  
+  @include mobile {
+    padding: $spacing-1 $spacing-2;
+    min-height: 24px;
+  }
+}
+
+.animation {
+  &.enter {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    
+    @include mobile {
+      transform: translateY(20px);
+    }
+  }
+  
+  &.enterActive {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition: all $transition-normal;
+    
+    @include mobile {
+      transform: translateY(0);
+    }
+  }
+  
+  &.exit {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    
+    @include mobile {
+      transform: translateY(0);
+    }
+  }
+  
+  &.exitActive {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+    transition: all $transition-normal;
+    
+    @include mobile {
+      transform: translateY(20px);
+    }
+  }
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: $color-primary;
+  border-radius: 0 0 $border-radius-md $border-radius-md;
+  
+  &.success {
+    background: $color-success;
+  }
+  
+  &.error {
+    background: $color-error;
+  }
+  
+  &.warning {
+    background: $color-warning;
+  }
+  
+  &.info {
+    background: $color-info;
+  }
+  
+  &.animate {
+    animation: progress $duration linear;
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+} 

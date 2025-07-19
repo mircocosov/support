@@ -1,0 +1,213 @@
+@import '@/assets/css/config.scss';
+
+.allTicketsPage {
+  min-height: 100vh;
+  height: 100vh;
+  background: var(--gradient-primary);
+  padding: var(--spacing-xl) var(--spacing-xl) 0 var(--spacing-xl);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+// Контент (таблица и фильтры) на белом фоне
+.allTicketsPageContent {
+  max-width: 1400px;
+  margin: var(--spacing-xl) auto 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  min-height: calc(100vh - 200px);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 700px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-md);
+  }
+  .pageTitle {
+    text-align: center;
+  }
+}
+
+.pageTitle {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0;
+  text-align: left;
+}
+
+.ticketsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.ticketsTable th, .ticketsTable td {
+  padding: var(--spacing-md) var(--spacing-md);
+  text-align: left;
+}
+
+.ticketsTable th {
+  background: #eaf0fa;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+}
+
+.ticketsTable tr {
+  border-bottom: 1px solid #eee;
+  transition: background var(--transition-fast);
+}
+
+.ticketsTable tr:hover {
+  background: #faf8ff;
+}
+
+.ticketRow {
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.ticketRow:hover {
+  background-color: #f5f5f5;
+}
+
+.loading, .error, .empty {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+  font-size: var(--font-size-xl);
+  color: var(--color-error);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.tab {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xxxl);
+  color: var(--color-white) !important;
+  -webkit-text-fill-color: var(--color-white) !important;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: var(--spacing-lg) 0 var(--spacing-md) 0;
+  transition: all var(--transition-normal);
+  text-shadow: 0 1px 8px var(--color-text-shadow);
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-hover);
+    border-radius: 1px;
+    transition: width var(--transition-cubic);
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+  }
+
+  &:hover, &:focus {
+    background: var(--gradient-hover) !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    color: var(--color-transparent) !important;
+    -webkit-text-fill-color: var(--color-transparent) !important;
+    text-shadow: none !important;
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &.active, &.tabActive {
+    color: var(--color-white) !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+    text-shadow: 0 1px 8px var(--color-text-shadow);
+
+    &::after {
+      width: 100%;
+    }
+
+    &:hover, &:focus {
+      background: var(--gradient-hover) !important;
+      background-clip: text !important;
+      -webkit-background-clip: text !important;
+      color: var(--color-transparent) !important;
+      -webkit-text-fill-color: var(--color-transparent) !important;
+      text-shadow: none !important;
+    }
+  }
+}
+
+// Мобильные стили для табов
+@media (max-width: 700px) {
+  .tabs {
+    display: none;
+  }
+  .tabsColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin: 0 auto var(--spacing-lg) auto;
+  }
+  .tabSmall {
+    font-family: 'Roboto', sans-serif;
+    font-weight: var(--font-weight-semi-bold);
+    font-size: var(--font-size-lg);
+    color: var(--color-white) !important;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm) 0;
+    transition: color var(--transition-normal);
+    text-align: center;
+    width: 180px;
+    border-radius: var(--border-radius-md);
+    margin: 0;
+  }
+  .tabSmall.active, .tabActive {
+    background: var(--color-overlay);
+    color: var(--color-white) !important;
+  }
+}
+
+// По умолчанию скрываем мобильные табы на десктопе
+.tabsColumn, .tabSmall {
+  display: none;
+}

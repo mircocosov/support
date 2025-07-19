@@ -1,0 +1,252 @@
+@import '@/assets/css/config.scss';
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: $color-white;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+  
+  @include mobile {
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
+  }
+}
+
+.tableHeader {
+  background: $color-gray-50;
+  
+  th {
+    padding: $spacing-3;
+    text-align: left;
+    font-weight: $font-weight-semibold;
+    color: $color-gray-900;
+    border-bottom: 1px solid $color-gray-200;
+    
+    @include mobile {
+      padding: $spacing-2;
+      font-size: $font-size-xs;
+    }
+  }
+}
+
+.tableBody {
+  tr {
+    transition: background-color $transition-normal;
+    
+    &:hover {
+      background: $color-gray-50;
+    }
+    
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+  
+  td {
+    padding: $spacing-3;
+    text-align: left;
+    border-bottom: 1px solid $color-gray-200;
+    color: $color-gray-700;
+    vertical-align: middle;
+    
+    @include mobile {
+      padding: $spacing-2;
+    }
+  }
+}
+
+.centerCell {
+  text-align: center;
+}
+
+.actionsCell {
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 0 !important;
+  height: 40px;
+  min-width: 60px;
+  width: 80px;
+  
+  @include mobile {
+    white-space: normal;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: $spacing-8;
+  color: $color-gray-500;
+  
+  @include mobile {
+    padding: $spacing-6;
+  }
+}
+
+.loadingRow {
+  td {
+    text-align: center;
+    padding: $spacing-8;
+    color: $color-gray-500;
+    
+    @include mobile {
+      padding: $spacing-6;
+    }
+  }
+}
+
+.sortableHeader {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  
+  &:hover {
+    background: $color-gray-100;
+  }
+  
+  &::after {
+    content: '↕';
+    position: absolute;
+    right: $spacing-2;
+    opacity: 0.5;
+    transition: opacity $transition-normal;
+  }
+  
+  &.asc::after {
+    content: '↑';
+    opacity: 1;
+  }
+  
+  &.desc::after {
+    content: '↓';
+    opacity: 1;
+  }
+  
+  @include mobile {
+    &::after {
+      right: $spacing-1;
+    }
+  }
+}
+
+.selectableRow {
+  cursor: pointer;
+  
+  &:hover {
+    background: rgba($color-primary, 0.05);
+  }
+  
+  &.selected {
+    background: rgba($color-primary, 0.1);
+  }
+}
+
+.checkboxCell {
+  width: 40px;
+  text-align: center;
+  
+  @include mobile {
+    width: 32px;
+  }
+}
+
+.expandableRow {
+  .expandIcon {
+    transition: transform $transition-normal;
+    
+    &.expanded {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.expandedContent {
+  background: $color-gray-50;
+  padding: $spacing-4;
+  border-top: 1px solid $color-gray-200;
+  
+  @include mobile {
+    padding: $spacing-3;
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4;
+  background: $color-white;
+  border-top: 1px solid $color-gray-200;
+  
+  @include mobile {
+    flex-direction: column;
+    gap: $spacing-3;
+    padding: $spacing-3;
+  }
+}
+
+.paginationInfo {
+  color: $color-gray-600;
+  font-size: $font-size-sm;
+  
+  @include mobile {
+    font-size: $font-size-xs;
+  }
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  
+  @include mobile {
+    gap: $spacing-1;
+  }
+}
+
+.paginationButton {
+  @include button-base;
+  padding: $spacing-1 $spacing-3;
+  min-height: 32px;
+  font-size: $font-size-sm;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  @include mobile {
+    padding: $spacing-1 $spacing-2;
+    min-height: 28px;
+    font-size: $font-size-xs;
+  }
+}
+
+.pageNumber {
+  padding: $spacing-1 $spacing-3;
+  border: 1px solid $color-gray-300;
+  border-radius: $border-radius-sm;
+  background: $color-white;
+  color: $color-gray-700;
+  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: $color-gray-50;
+    border-color: $color-primary;
+  }
+  
+  &.active {
+    background: $color-primary;
+    color: $color-white;
+    border-color: $color-primary;
+  }
+  
+  @include mobile {
+    padding: $spacing-1 $spacing-2;
+    font-size: $font-size-xs;
+  }
+} 
