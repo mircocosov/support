@@ -239,11 +239,9 @@ priority: low
 
 last reflection dump:
 
-4F 42 53 45 52 56 45 52 20 4C 4F 43 41 54 49 4F 4E 20 4C 4F 43 4B 45 44
+4E 35 35 2E 37 35 35 38
 
-coarse pattern detected:
-
-55 53 45 52 20 4C 41 59 45 52 20 31 32 2E 31 30 2C 20 4E 41 53 54 41
+45 33 37 2E 36 31 37 33
 
 note:
 system attempted auto-correction but failed to resolve mirror offset
