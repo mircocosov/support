@@ -239,9 +239,7 @@ priority: low
 
 last reflection dump:
 
-4E 35 35 2E 37 35 35 38
-
-45 33 37 2E 36 31 37 33
+41 4C 4C 20 49 53 20 4E 55 4D 42 45 52
 
 note:
 system attempted auto-correction but failed to resolve mirror offset
